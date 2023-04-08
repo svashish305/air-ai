@@ -20,6 +20,8 @@ pip freeze > requirements.txt
 uvicorn main:app --reload
 pip install -r requirements.txt
 ```
+[API Docs](http://127.0.0.1:8000/docs)
+[Alternate Interactive API Docs](http://127.0.0.1:8000/redoc)
 
 #### For Frontend
 
