@@ -4,7 +4,7 @@ A GPT-powered air quality website that allows users to ask questions about air q
 
 ## Stack
 
-React with Typescript for Frontend, deployed on fly.io [here](https://air-ai.onrender.com)
+React with Typescript for Frontend, deployed on fly.io [here](https://air-ai.fly.dev)
 LangChain with FastAPI Python framework for Backend, deployed on Netlify [here](https://cosmic-torrone-3174f0.netlify.app/)
 
 ### Setup Instructions
