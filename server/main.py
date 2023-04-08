@@ -20,6 +20,7 @@ def get_settings():
 
 origins = [
     "http://localhost:5173",
+    "https://cosmic-torrone-3174f0.netlify.app/"
 ]
 
 app.add_middleware(
