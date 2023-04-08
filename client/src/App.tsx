@@ -60,7 +60,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div id="app">
       <>
         {/* Chat Container */}
         <div id="chat_container">
