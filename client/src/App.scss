@@ -7,6 +7,12 @@
   padding: 0 1rem;
 }
 
+@media only screen and (max-width: 550px) {
+  .aqiScaleContainer {
+    flex-direction: column;
+  }
+}
+
 .aqiScaleBox {
   display: flex;
   justify-content: center;
