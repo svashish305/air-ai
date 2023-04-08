@@ -22,7 +22,7 @@ function App() {
 
     // fetch data from server
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/query`, {
+      const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/query`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
