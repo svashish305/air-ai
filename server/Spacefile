@@ -5,6 +5,7 @@ micros:
     src: ./
     engine: python3.9
     primary: true
+    public: true
     presets:
       env:
         - name: OPENAI_API_KEY

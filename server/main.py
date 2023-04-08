@@ -16,39 +16,40 @@ app = FastAPI()
 
 @lru_cache()
 def get_settings():
-    return settings
+  return settings
 
 origins = [
-    "http://localhost:5173",
-    "https://cosmic-torrone-3174f0.netlify.app"
+  "http://localhost:5173",
+  "https://cosmic-torrone-3174f0.netlify.app"
 ]
 
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+  CORSMiddleware,
+  allow_origins=origins,
+  allow_credentials=True,
+  allow_methods=["*"],
+  allow_headers=["*"],
 )
 
 @app.get("/", name="root", summary="Health check")
 def read_root():
-    return {"Hello": "world"}
+  return {"Hello": "world"}
 
 class Query(BaseModel):
-    prompt: str
+  prompt: str
 
 @app.post("/query", name="query", summary="Query AQI Data")
 async def query(query: Query):
-    try:
-        prompt = query.prompt
-        print("received prompt: ", prompt)
+  try:
+    prompt = query.prompt
+    print("received prompt: ", prompt)
 
-        llm = OpenAI(temperature=0, openai_api_key=settings.OPENAI_API_KEY)
-        tools = load_tools(["serpapi", "llm-math"], llm=llm)
-        agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
-        response = agent.run(prompt)
-        return {"data": response}
-    except Exception as e:
-        print("error: ", str(e))
-        return {"error": str(e)}
+    llm = OpenAI(temperature=0, openai_api_key=settings.OPENAI_API_KEY)
+    tools = load_tools(["serpapi", "llm-math"], llm=llm)
+    agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
+    response = agent.run(prompt)
+    
+    return {"data": response}
+  except Exception as e:
+    print("error: ", str(e))
+    return {"error": str(e)}
