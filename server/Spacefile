@@ -1,0 +1,11 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: server
+    src: ./
+    engine: python3.9
+    primary: true
+    presets:
+      env:
+        - name: OPENAI_API_KEY
+        - name: SERPAPI_API_KEY
