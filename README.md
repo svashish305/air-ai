@@ -1,4 +1,6 @@
-# AirAI : a GPT-powered air quality website that allows users to ask questions about air quality in different cities and receive answers in real-time. The website should display visual indicators of air quality for each city mentioned in the user’s query
+# AirAI
+
+A GPT-powered air quality website that allows users to ask questions about air quality in different cities and receive answers in real-time. The website should display visual indicators of air quality for each city mentioned in the user’s query
 
 ## Stack
 
@@ -27,7 +29,7 @@ pip install -r requirements.txt
 
 ```javascript
 npm create vite@latest
-//: # (select react with typescript)
+// select react and typescript, then cd into the directory
 npm i
 npm run dev
 ```
