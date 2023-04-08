@@ -4,6 +4,7 @@ from functools import lru_cache
 from dotenv import load_dotenv
 
 from fastapi import FastAPI, Request
+from pydantic import BaseModel
 from config import settings
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -31,15 +32,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
+@app.get("/", name="root", summary="Health check")
 def read_root():
     return {"Hello": "world"}
 
-@app.post("/query")
-async def query(req: Request):
+class Query(BaseModel):
+    prompt: str
+
+@app.post("/query", name="query", summary="Query AQI Data")
+async def query(query: Query):
     try:
-        req_body = await req.json()
-        prompt = req_body.get("prompt", "")
+        prompt = query.prompt
         print("received prompt: ", prompt)
 
         llm = OpenAI(temperature=0, openai_api_key=settings.OPENAI_API_KEY)
