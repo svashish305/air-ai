@@ -61,6 +61,12 @@ function App() {
     <div className="App">
       <>
         {/* Chat Container */}
+        <div id="chat_container">
+          {chat.map(({ isAi, value, uniqueId }: 
+            { isAi: boolean, value: string, uniqueId: any }) =>
+            renderChat(isAi, value, uniqueId)
+          )}
+        </div>
         <form onSubmit={handleSubmit}>
           <textarea 
             name="prompt" 
@@ -72,12 +78,6 @@ function App() {
           ></textarea>
           <button type="submit"><img src={send} /></button>
         </form>
-        <div id="chat_container">
-          {chat.map(({ isAi, value, uniqueId }: 
-            { isAi: boolean, value: string, uniqueId: any }) =>
-            renderChat(isAi, value, uniqueId)
-          )}
-        </div>
       </>
       <>
         {/* Visual Indicator of AQI */}
