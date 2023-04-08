@@ -1,11 +1,10 @@
-import os
-import json
 from functools import lru_cache
 from dotenv import load_dotenv
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from pydantic import BaseModel
 from config import settings
+
 from fastapi.middleware.cors import CORSMiddleware
 
 from langchain.llms import OpenAI
