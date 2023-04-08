@@ -4,8 +4,9 @@ A GPT-powered air quality website that allows users to ask questions about air q
 
 ## Stack
 
-React with Typescript for Frontend, deployed on deta.space [here](https://server-1-k7259360.deta.app/)
-LangChain with FastAPI Python framework for Backend, deployed on Netlify [here](https://cosmic-torrone-3174f0.netlify.app/)
+React with Typescript for Frontend, deployed on deta.space [here](https://server-1-k7259360.deta.app/).
+\
+LangChain with FastAPI Python framework for Backend, deployed on Netlify [here](https://cosmic-torrone-3174f0.netlify.app/).
 
 ### Setup Instructions
 
@@ -22,6 +23,7 @@ pip freeze > requirements.txt
 uvicorn main:app --reload
 pip install -r requirements.txt
 ```
+
 [API Docs](http://127.0.0.1:8000/docs)
 [Alternate Interactive API Docs](http://127.0.0.1:8000/redoc)
 
