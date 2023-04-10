@@ -24,8 +24,8 @@ uvicorn main:app --reload
 pip install -r requirements.txt
 ```
 
-[API Docs](http://127.0.0.1:8000/docs)
-[Alternate Interactive API Docs](http://127.0.0.1:8000/redoc)
+[API Docs](https://server-1-k7259360.deta.app/docs)
+[Alternate Interactive API Docs](https://server-1-k7259360.deta.app/redoc)
 
 #### For Frontend
 
