@@ -4,9 +4,10 @@ A GPT-powered air quality website that allows users to ask questions about air q
 
 ## Stack
 
-React with Typescript and SCSS for Frontend, deployed on netlify [here](https://cosmic-torrone-3174f0.netlify.app/).
-\
 LangChain with FastAPI for Backend, deployed on deta.space [here](https://server-1-k7259360.deta.app/).
+
+\
+React with Typescript and SCSS for Frontend, deployed on netlify [here](https://cosmic-torrone-3174f0.netlify.app/).
 
 ### Setup Instructions
 
