@@ -6,6 +6,15 @@ function App() {
   const [prompt, setPrompt] = useState("");
   const [chat, setChat] = useState<any>([]);
   const [isAi, setIsAi] = useState(false);
+  const [cityAqiInfo, setCityAqiInfo] = useState<any>([]);
+
+  const generateUniqueId = () => {
+    const timestamp = Date.now();
+    const randomNumber = Math.random();
+    const hexadecimalString = randomNumber.toString(16);
+
+    return `id-${timestamp}-${hexadecimalString}`;
+  };
 
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
@@ -34,7 +43,9 @@ function App() {
   
       if (response.ok) {
         const data = await response.json();
-        const parsedData = data.data.trim();
+        const { cityAqiData, answer } = data.data;
+        setCityAqiInfo(cityAqiData);
+        const parsedData = answer.trim();
         
         // add bot's chat to chat list
         setIsAi(true);
@@ -48,15 +59,6 @@ function App() {
       console.log(error);
       alert(error);
     }
-    
-  };
-
-  const generateUniqueId = () => {
-    const timestamp = Date.now();
-    const randomNumber = Math.random();
-    const hexadecimalString = randomNumber.toString(16);
-
-    return `id-${timestamp}-${hexadecimalString}`;
   };
 
   return (
@@ -94,42 +96,54 @@ function App() {
       </>
       <>
         {((!prompt || !prompt.length)) && isAi && <div>
-          {/* Visual Indicator of AQI */}
-          <div>
-            <div style={{textAlign: "center", padding: "1rem", color: "white"}}>AQI Scale</div>
-            <div className="aqiScaleContainer">
-              <div className="aqiScaleBox" style={{backgroundColor: 'maroon'}}>Hazardous (&gt; 300)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'purple'}}>Very Unhealthy (201-300)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'red'}}>Unhealthy (151-200)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'orange'}}>Unhealthy for Sensitive Groups (101-150)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'yellow'}}>Moderate (51-100)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'green'}}>Good (0-50)</div>
+          {/* AQI Scale as Visual Indicator */}
+          {cityAqiInfo?.map((data: any) => (
+            <div key={data.id}>
+              <div 
+                style={{textAlign: "center", padding: "1rem", color: "white"}}
+              >
+                {data.city} has a current AQI of {data.aqi}, selected region in below AQI Scale has blue border 
+              </div>
+              <div className="aqiScaleContainer">
+                <div 
+                  className={`aqiScaleBox ${data.color === "maroon" ? "blueBorder" : ""}`} 
+                  style={{backgroundColor: 'maroon'}}
+                >
+                  Hazardous (&gt; 300)
+                </div>
+                <div 
+                  className={`aqiScaleBox ${data.color === "purple" ? "blueBorder" : ""}`} 
+                  style={{backgroundColor: 'purple'}}
+                >
+                  Very Unhealthy (201-300)
+                </div>
+                <div
+                  className={`aqiScaleBox ${data.color === "red" ? "blueBorder" : ""}`} 
+                  style={{backgroundColor: 'red'}}
+                >
+                  Unhealthy (151-200)
+                </div>
+                <div 
+                  className={`aqiScaleBox ${data.color === "orange" ? "blueBorder" : ""}`} 
+                  style={{backgroundColor: 'orange'}}
+                >
+                  Unhealthy for Sensitive Groups (101-150)
+                </div>
+                <div 
+                  className={`aqiScaleBox ${data.color === "yellow" ? "blueBorder" : ""}`} 
+                  style={{backgroundColor: 'yellow'}}
+                >
+                  Moderate (51-100)
+                </div>
+                <div 
+                  className={`aqiScaleBox ${data.color === "green" ? "blueBorder" : ""}`} 
+                  style={{backgroundColor: 'green'}}
+                >
+                  Good (0-50)
+                </div>
+              </div>
             </div>
-          </div>
-
-          {/* Visual Indicator of PM2.5 Concentration averaged over 1 hour */}
-          <div>
-            <div style={{textAlign: "center", marginTop: "1rem", padding: "1rem", color: "white"}}>PM2.5 µg/m3 Concentration Scale (averaged over 1 hour)</div>
-            <div className="aqiScaleContainer">
-              <div className="aqiScaleBox" style={{backgroundColor: 'maroon'}}>Extremely Poor (&gt; 300)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'red'}}>Very Poor (100-300)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'orange'}}>Poor (50-100)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'yellow'}}>Fair (25-50)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'green'}}>Good (0-25)</div>
-            </div>
-          </div>
-
-          {/* Visual Indicator of PM2.5 Concentration averaged over 24 hours */}
-          <div>
-            <div style={{textAlign: "center", marginTop: "1rem", padding: "1rem", color: "white"}}>PM2.5 µg/m3 Concentration Scale (averaged over 24 hours)</div>
-            <div className="aqiScaleContainer">
-              <div className="aqiScaleBox" style={{backgroundColor: 'maroon'}}>Extremely Poor (&gt; 150)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'red'}}>Very Poor (50-150)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'orange'}}>Poor (25-50)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'yellow'}}>Fair (12.5-25)</div>
-              <div className="aqiScaleBox" style={{backgroundColor: 'green'}}>Good (0-12.5)</div>
-            </div>
-          </div>
+          ))}
         </div>}
       </>
     </div>
