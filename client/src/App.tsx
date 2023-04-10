@@ -100,25 +100,25 @@ function App() {
           {cityAqiInfo?.map((data: any) => (
             <div key={data.id}>
               <div style={{textAlign: "center", padding: "1rem", color: "white"}}>
-                {data.city} has a current AQI of {data.aqi}, selected region in below AQI Scale has the blue border 
+                {data.city} has a current AQI of {data.aqi}, corresponding box with inclusive AQI range has the black border below: 
               </div>
               <div className="aqiScaleContainer">
-                <div className={`aqiScaleBox aqiScaleMaroonBox ${data.color === "maroon" ? "blueBorder" : ""}`}>
+                <div className={`aqiScaleBox aqiScaleMaroonBox ${data.color === "maroon" ? "blackBorder" : ""}`}>
                   Hazardous (&gt; 300)
                 </div>
-                <div className={`aqiScaleBox aqiScalePurpleBox ${data.color === "purple" ? "blueBorder" : ""}`}>
+                <div className={`aqiScaleBox aqiScalePurpleBox ${data.color === "purple" ? "blackBorder" : ""}`}>
                   Very Unhealthy (201-300)
                 </div>
-                <div className={`aqiScaleBox aqiScaleRedBox ${data.color === "red" ? "blueBorder" : ""}`}>
+                <div className={`aqiScaleBox aqiScaleRedBox ${data.color === "red" ? "blackBorder" : ""}`}>
                   Unhealthy (151-200)
                 </div>
-                <div className={`aqiScaleBox aqiScaleOrangeBox ${data.color === "orange" ? "blueBorder" : ""}`}>
+                <div className={`aqiScaleBox aqiScaleOrangeBox ${data.color === "orange" ? "blackBorder" : ""}`}>
                   Unhealthy for Sensitive Groups (101-150)
                 </div>
-                <div className={`aqiScaleBox aqiScaleYellowBox ${data.color === "yellow" ? "blueBorder" : ""}`}>
+                <div className={`aqiScaleBox aqiScaleYellowBox ${data.color === "yellow" ? "blackBorder" : ""}`}>
                   Moderate (51-100)
                 </div>
-                <div className={`aqiScaleBox aqiScaleGreenBox ${data.color === "green" ? "blueBorder" : ""}`}>
+                <div className={`aqiScaleBox aqiScaleGreenBox ${data.color === "green" ? "blackBorder" : ""}`}>
                   Good (0-50)
                 </div>
               </div>
