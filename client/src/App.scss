@@ -18,6 +18,62 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  font-weight: bold;
+}
+
+$white: #fff;
+$black: #000;
+
+/* 
+  Below function calculates the luminance of the background color using the formula Y = 0.299R + 0.587G + 0.114B, 
+  where R, G, and B are the red, green, and blue components of the color. 
+  If the luminance is greater than 128, which is about halfway between black (0) and white (255) on a scale of 0-255, 
+  the function returns black; otherwise, it returns white. 
+*/
+@function get-contrast-color($color) {
+  $red: red($color);
+  $green: green($color);
+  $blue: blue($color);
+  $luminance: ($red * 0.299) + ($green * 0.587) + ($blue * 0.114);
+  @if ($luminance > 128) {
+    @return $black;
+  } @else {
+    @return $white;
+  }
+}
+
+@mixin contrast-text($color) {
+  color: get-contrast-color($color);
+}
+
+.aqiScaleMaroonColor {
+  background: #800000;
+  @include contrast-text(#800000);
+}
+
+.aqiScalePurpleColor {
+  background: #800080;
+  @include contrast-text(#800080);
+}
+
+.aqiScaleRedColor {
+  background: #ff0000;
+  @include contrast-text(#ff0000);
+}
+
+.aqiScaleOrangeColor {
+  background: #ffa500;
+  @include contrast-text(#ffa500);
+}
+
+.aqiScaleYellowColor {
+  background: #ffff00;
+  @include contrast-text(#ffff00);
+}
+
+.aqiScaleGreenColor {
+  background: #008000;
+  @include contrast-text(#008000);
 }
 
 .blueBorder {

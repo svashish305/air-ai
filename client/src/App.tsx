@@ -43,7 +43,7 @@ function App() {
   
       if (response.ok) {
         const data = await response.json();
-        const { cityAqiData, answer } = data.data;
+        const { data: cityAqiData, answer } = data;
         setCityAqiInfo(cityAqiData);
         const parsedData = answer.trim();
         
@@ -102,42 +102,36 @@ function App() {
               <div 
                 style={{textAlign: "center", padding: "1rem", color: "white"}}
               >
-                {data.city} has a current AQI of {data.aqi}, selected region in below AQI Scale has blue border 
+                {data.city} has a current AQI of {data.aqi}, selected region in below AQI Scale has the blue border 
               </div>
               <div className="aqiScaleContainer">
                 <div 
-                  className={`aqiScaleBox ${data.color === "maroon" ? "blueBorder" : ""}`} 
-                  style={{backgroundColor: 'maroon'}}
+                  className={`aqiScaleBox aqiScaleMaroonColor ${data.color === "maroon" ? "blueBorder" : ""}`} 
                 >
                   Hazardous (&gt; 300)
                 </div>
                 <div 
-                  className={`aqiScaleBox ${data.color === "purple" ? "blueBorder" : ""}`} 
-                  style={{backgroundColor: 'purple'}}
+                  className={`aqiScaleBox aqiScalePurpleColor ${data.color === "purple" ? "blueBorder" : ""}`} 
                 >
                   Very Unhealthy (201-300)
                 </div>
                 <div
-                  className={`aqiScaleBox ${data.color === "red" ? "blueBorder" : ""}`} 
-                  style={{backgroundColor: 'red'}}
+                  className={`aqiScaleBox aqiScaleRedColor ${data.color === "red" ? "blueBorder" : ""}`} 
                 >
                   Unhealthy (151-200)
                 </div>
                 <div 
-                  className={`aqiScaleBox ${data.color === "orange" ? "blueBorder" : ""}`} 
-                  style={{backgroundColor: 'orange'}}
+                  className={`aqiScaleBox aqiScaleOrangeColor ${data.color === "orange" ? "blueBorder" : ""}`} 
                 >
                   Unhealthy for Sensitive Groups (101-150)
                 </div>
                 <div 
-                  className={`aqiScaleBox ${data.color === "yellow" ? "blueBorder" : ""}`} 
-                  style={{backgroundColor: 'yellow'}}
+                  className={`aqiScaleBox aqiScaleYellowColor ${data.color === "yellow" ? "blueBorder" : ""}`} 
                 >
                   Moderate (51-100)
                 </div>
                 <div 
-                  className={`aqiScaleBox ${data.color === "green" ? "blueBorder" : ""}`} 
-                  style={{backgroundColor: 'green'}}
+                  className={`aqiScaleBox aqiScaleGreenColor ${data.color === "green" ? "blueBorder" : ""}`} 
                 >
                   Good (0-50)
                 </div>
