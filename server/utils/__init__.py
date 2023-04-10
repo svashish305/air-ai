@@ -81,20 +81,29 @@ def get_aqi_response_from_city_data(city_names):
   result = None
   aqi_values = []
   for city_name in city_names:
-    waqi_api_url = f"https://api.waqi.info/feed/{city_name}/?token={waqi_api_key}"
-    response = requests.get(waqi_api_url)
-    json_response = json.loads(response)
-    aqi_value = json_response.get("data").get("aqi")
-    aqi_values.append(str(aqi_value))
-    aqi_scale_color = get_aqi_scale_color(aqi_value)
-    city_aqi_data.append(
-      {
-        "id": uuid.uuid4(),
-        "city": city_name,
-        "aqi": aqi_value,
-        "color": aqi_scale_color
+    try:
+      waqi_api_url = f"https://api.waqi.info/feed/{city_name}/?token={waqi_api_key}"
+      response = requests.get(waqi_api_url)
+      json_response = json.loads(response)
+      aqi_value = json_response.get("data").get("aqi")
+      aqi_values.append(str(aqi_value))
+      aqi_scale_color = get_aqi_scale_color(aqi_value)
+      city_aqi_data.append(
+        {
+          "id": uuid.uuid4(),
+          "city": city_name,
+          "aqi": aqi_value,
+          "color": aqi_scale_color
+        }
+      )
+    except Exception as e:
+      print(e)
+      result = {
+        "city_aqi_data": [],
+        "response": "Sorry, I couldn't find the air quality of the city you asked for."
       }
-    )
+      return result
+    
   city_phrase = parse_list_as_readable_string(city_names)
   aqi_phrase = parse_list_as_readable_string(aqi_values)
   response = f"The air qualities of {city_phrase} are {aqi_phrase} respectively." 
