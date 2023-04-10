@@ -1,22 +1,12 @@
 from functools import lru_cache
-from dotenv import load_dotenv
-
 from fastapi import FastAPI
-from pydantic import BaseModel
-from config import settings
-
 from fastapi.middleware.cors import CORSMiddleware
 
-from langchain.llms import OpenAI
-from langchain.agents import (load_tools, initialize_agent, AgentType)
-
-load_dotenv()
+from config import settings
+from models import Query
+from utils import parse_user_prompt, get_aqi_response_from_city_data
 
 app = FastAPI()
-
-@lru_cache()
-def get_settings():
-  return settings
 
 origins = [
   "http://localhost:5173",
@@ -31,25 +21,33 @@ app.add_middleware(
   allow_headers=["*"],
 )
 
-@app.get("/", name="root", summary="Health check")
-def read_root():
-  return {"Hello": "world"}
+@lru_cache()
+def get_settings():
+  return settings
 
-class Query(BaseModel):
-  prompt: str
+@app.get("/", name="root", summary="Health Check")
+def read_root():
+  return {"Hello": "World"}
+
 
 @app.post("/query", name="query", summary="Query AQI Data")
 async def query(query: Query):
   try:
-    prompt = query.prompt
-    print("received prompt: ", prompt)
+    response = None
+    user_prompt = query.prompt
+    print("received prompt: ", user_prompt)
 
-    llm = OpenAI(temperature=0, openai_api_key=settings.OPENAI_API_KEY)
-    tools = load_tools(["serpapi", "llm-math"], llm=llm)
-    agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
-    response = agent.run(prompt)
-    
+    parsed_prompt_data = parse_user_prompt(user_prompt)
+    print("parsed_prompt: ", parsed_prompt_data.get("parsed_prompt"))
+
+    aqi_response = get_aqi_response_from_city_data(parsed_prompt_data.get("city_info"))
+    print("aqi_data response: ", aqi_response)
+
+    response = {
+      "cityAqiData": aqi_response.get("city_aqi_data"),
+      "answer": aqi_response.get("response"),
+    } 
     return {"data": response}
   except Exception as e:
-    print("error: ", str(e))
+    print("error: ", e)
     return {"error": str(e)}

@@ -9,4 +9,4 @@ micros:
     presets:
       env:
         - name: OPENAI_API_KEY
-        - name: SERPAPI_API_KEY
+        - name: WAQI_API_KEY
