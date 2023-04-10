@@ -15,7 +15,7 @@ greenlet==2.0.2
 h11==0.14.0
 httptools==0.5.0
 idna==3.4
-langchain==0.0.134
+langchain==0.0.136
 marshmallow==3.19.0
 marshmallow-enum==1.5.1
 multidict==6.0.4
