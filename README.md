@@ -24,6 +24,7 @@ pip freeze > requirements.txt
 ```
 
 [API Docs](https://server-1-k7259360.deta.app/docs)
+\
 [Alternate Interactive API Docs](https://server-1-k7259360.deta.app/redoc)
 
 #### For Frontend
