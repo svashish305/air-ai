@@ -75,6 +75,7 @@ def get_aqi_scale_color(aqi_value):
 
 # This function returns the AQI data from the city data using the WAQI API (website: https://aqicn.org/here/ api doc: https://aqicn.org/json-api/doc/)
 def get_aqi_response_from_city_data(city_names):
+  city_count = len(city_names)
   waqi_api_url = None
   city_aqi_data = []
   response = None
@@ -106,7 +107,10 @@ def get_aqi_response_from_city_data(city_names):
     
   city_phrase = parse_list_as_readable_string(city_names)
   aqi_phrase = parse_list_as_readable_string(aqi_values)
-  response = f"The air qualities of {city_phrase} are {aqi_phrase} respectively." 
+  if city_count > 1:
+    response = f"The air qualities of {city_phrase} are {aqi_phrase} respectively."
+  else:
+    response = f"The air quality of {city_phrase} is {aqi_phrase}."
 
   result = {
     "city_aqi_data": city_aqi_data,
