@@ -16,7 +16,7 @@ requests = TextRequestsWrapper()
 model_name = 'text-davinci-003'
 temperature = 0.0
 openai_api_key = os.getenv("OPENAI_API_KEY")
-waqi_api_key = os.getenv("WAQI_API_KEY")
+waqi_api_key = os.getenv("WAQI_API_KEY") # Get Yours Here: https://aqicn.org/data-platform/token/
 
 llm = OpenAI(model_name=model_name, temperature=temperature, openai_api_key=openai_api_key)
 
