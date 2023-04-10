@@ -46,32 +46,32 @@ $black: #000;
   color: get-contrast-color($color);
 }
 
-.aqiScaleMaroonColor {
+.aqiScaleMaroonBox {
   background: #800000;
   @include contrast-text(#800000);
 }
 
-.aqiScalePurpleColor {
+.aqiScalePurpleBox {
   background: #800080;
   @include contrast-text(#800080);
 }
 
-.aqiScaleRedColor {
+.aqiScaleRedBox {
   background: #ff0000;
   @include contrast-text(#ff0000);
 }
 
-.aqiScaleOrangeColor {
+.aqiScaleOrangeBox {
   background: #ffa500;
   @include contrast-text(#ffa500);
 }
 
-.aqiScaleYellowColor {
+.aqiScaleYellowBox {
   background: #ffff00;
   @include contrast-text(#ffff00);
 }
 
-.aqiScaleGreenColor {
+.aqiScaleGreenBox {
   background: #008000;
   @include contrast-text(#008000);
 }
